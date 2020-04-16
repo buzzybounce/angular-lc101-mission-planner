@@ -9,6 +9,8 @@ export class CrewComponent implements OnInit {
 
   inCrew: boolean = false;
   crew: object[] = [];
+  mouseOver: boolean = false;
+  astronautPic: string = '';
 
   candidates: object[] = [
     {name: "Sally Ride", photo: 'https://handlers.education.launchcode.org/static/images/sally-ride.jpg'},
@@ -25,5 +27,53 @@ export class CrewComponent implements OnInit {
   ngOnInit() { }
 
   // Code the 'addCrewMember' function here:
+  addCrewMember (member: object) {
+
+    if (this.crew.length < 3) {
+
+      if (!this.crew.includes(member)) {
+
+        member['inCrew'] = true;
+        this.crew.push (member);
+
+      }
+
+      else {
+
+        member['inCrew'] = false;
+        let memberNumber = this.crew.indexOf(member);
+        this.crew.splice(memberNumber, 1);
+
+      }
+
+    }
+
+    else {
+
+      if (this.crew.includes(member)) {
+
+        member['inCrew'] = false;
+        let memberNumber = this.crew.indexOf(member);
+        this.crew.splice(memberNumber, 1);
+
+      }
+
+    }
+
+  }
+
+  mouseOverEvent(member: object) {
+
+    this.mouseOver = true;
+    this.astronautPic = member['photo'];
+
+  }
+
+  mouseOutEvent() {
+
+    this.mouseOver = false;
+    this.astronautPic = '';
+
+  }
 
 }
